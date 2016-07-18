@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main_panel %}
+    <section title="termsandconditions" data-role="content">
+        <h1>Please Accept {{ form.initial.terms.name|safe }}</h1>
+        {{ form.errors }}
+        <div id="tc-terms-html">
+            {{ form.initial.terms.text|safe|linebreaksbr }}
+        </div>
+        <form action="{% url 'tc_accept_page' %}" method="post" id="tc-terms-form" data-ajax="false">
+            {% csrf_token %}
+            {{ form.terms }}
+            {{ form.returnTo }}
+            <p><input type="submit" value="Accept" data-role="button"></p>
+        </form>
+    </section>
+{% endblock %}
